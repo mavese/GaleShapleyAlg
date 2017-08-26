@@ -65,30 +65,23 @@ def gs_block(men, women, pref, blocked):
             else:    
                 rank[w][m] = i
                 i+=1
-
-    prefptr = {}
-    for m in men:
-        prefptr[m] = 0
-
-    freemen = set(men)    #initially all men and women are free
-    numpartners = len(men) 
-    S = {}           #build dictionary to store engagements 
-
-    #run the algorithm
+    prefptr = {m:0 for m in men}
+    freemen = set{men}
+    S = {}
     while freemen:
-        m = freemen.pop()
-        #get the highest ranked woman that has not yet been proposed to
-        w = pref[m][prefptr[m]]
-        prefptr[m]+=1
-        if w not in S and rank[w][m] != 4: S[w] = m
-        else:
-            mprime = S[w]
-            if rank[w][m] < rank[w][mprime]:
-                S[w] = m
-                freemen.add(mprime)
-            else:
-                freemen.add(m)
-    return S 
+    	m = freemen.pop()
+    	w = pref[m][prefptr[m]]
+    	prefptr[m]+=1
+    	if w !in S and rank[w][m] != 4:
+    		S[w] = m
+		else:
+			OGMan = S[w]
+			if rank[w][m] < rank[w][OGMan]:
+				S[w] = m
+				freemen.add(OGMan)
+			else:
+				freemen.add(m)
+	return S
 
 def gs_tie(men, women, preftie):
     """
