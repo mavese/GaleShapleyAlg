@@ -66,22 +66,25 @@ def gs_block(men, women, pref, blocked):
                 rank[w][m] = i
                 i+=1
     prefptr = {m:0 for m in men}
-    freemen = set{men}
+    freemen = set(men)
     S = {}
     while freemen:
-    	m = freemen.pop()
-    	w = pref[m][prefptr[m]]
-    	prefptr[m]+=1
-    	if w !in S and rank[w][m] != 4:
-    		S[w] = m
-		else:
-			OGMan = S[w]
-			if rank[w][m] < rank[w][OGMan]:
-				S[w] = m
-				freemen.add(OGMan)
-			else:
-				freemen.add(m)
-	return S
+        m = freemen.pop()
+        w = pref[m][prefptr[m]]
+        prefptr[m]+=1
+        if w not in S:
+            if rank[w][m] != 4:
+                freemen.add(m)
+            else:
+                S[w] = m
+        else:
+            OGMan = S[w]
+            if rank[w][m] < rank[w][OGMan]:
+                S[w] = m
+                freemen.add(OGMan)
+            else:
+                freemen.add(m)
+    return S
 
 def gs_tie(men, women, preftie):
     """
