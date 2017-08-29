@@ -107,7 +107,24 @@ def gs_tie(men, women, preftie):
     		i += 1
     for m in men:
     	preftie[m].reverse()
-    print preftie
+    freemen = set(men)
+    S = {}
+    while freemen:
+    	m = freemen.pop()
+    	st = preftie[m].pop()
+    	w = st.pop()
+    	if st:
+    		preftie[m].append(st)
+    	if w not in S:
+    		S[w] = m
+    	else:
+    		mPrime = S[w]
+    		if rank[w][m] > rank[w][mPrime]:
+    			S[w] = m
+    			freemen.add(mPrime)
+    		else:
+    			freemen.add(m)
+    return S
 if __name__=="__main__":
     #input data
     themen = ['xavier','yancey','zeus']
