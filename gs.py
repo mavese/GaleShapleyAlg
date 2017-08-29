@@ -97,8 +97,17 @@ def gs_tie(men, women, preftie):
             pref (dictionary of preferences mapping names to list of sets of preferred names in sorted order)
     Output: dictionary of stable matches
     """
-    return "test"
-
+    rank = {}
+    for w in women:
+    	i = 1
+    	rank[w] = {}
+    	for st in preftie[w]:
+    		for m in st:
+    			rank[w][m] = i
+    		i += 1
+    for m in men:
+    	preftie[m].reverse()
+    print preftie
 if __name__=="__main__":
     #input data
     themen = ['xavier','yancey','zeus']
@@ -125,8 +134,8 @@ if __name__=="__main__":
     # match = gs(themen,thewomen,thepref)
     # print match
     
-    match_block = gs_block(themen,thewomen,thepref,blocked)
-    print match_block
+    # match_block = gs_block(themen,thewomen,thepref,blocked)
+    # print match_block
 
-    # match_tie = gs_tie(themen,thewomen,thepreftie)
-    # print match_tie
+    match_tie = gs_tie(themen,thewomen,thepreftie)
+    print match_tie
