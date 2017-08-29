@@ -66,22 +66,25 @@ def gs_block(men, women, pref, blocked):
                 rank[w][m] = i
                 i+=1
     prefptr = {m:0 for m in men}
+    numpartners = len(men)
     freemen = set(men)
     S = {}
     while freemen:
         m = freemen.pop()
+        if prefptr[m] >= numpartners:
+        	continue
         w = pref[m][prefptr[m]]
         prefptr[m]+=1
         if w not in S:
-            if rank[w][m] != 4:
+            if rank[w][m] == 4:
                 freemen.add(m)
             else:
                 S[w] = m
         else:
-            OGMan = S[w]
-            if rank[w][m] < rank[w][OGMan]:
+            mPrime = S[w]
+            if rank[w][m] < rank[w][mPrime]:
                 S[w] = m
-                freemen.add(OGMan)
+                freemen.add(mPrime)
             else:
                 freemen.add(m)
     return S
@@ -119,8 +122,8 @@ if __name__=="__main__":
     blocked = {('xavier','clare'),('zeus','clare'),('zeus','amy')}
 
     #eng
-    match = gs(themen,thewomen,thepref)
-    print match
+    # match = gs(themen,thewomen,thepref)
+    # print match
     
     match_block = gs_block(themen,thewomen,thepref,blocked)
     print match_block
