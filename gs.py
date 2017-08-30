@@ -119,7 +119,7 @@ def gs_tie(men, women, preftie):
     		S[w] = m
     	else:
     		mPrime = S[w]
-    		if rank[w][m] > rank[w][mPrime]:
+    		if rank[w][m] >= rank[w][mPrime]:
     			S[w] = m
     			freemen.add(mPrime)
     		else:
