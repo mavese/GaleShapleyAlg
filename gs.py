@@ -1,7 +1,5 @@
-# Tyler Moore
-# Python implementation of stable matching problem
-# Homework 1 Starter Code
-# CS 2123 last modified 8/31/16
+#Matteo Mantese, Matthew King
+#Referenced starter code and book.
 
 def gs(men, women, pref):
     """
@@ -148,11 +146,11 @@ if __name__=="__main__":
     blocked = {('xavier','clare'),('zeus','clare'),('zeus','amy')}
 
     #eng
-    # match = gs(themen,thewomen,thepref)
-    # print match
+    match = gs(themen,thewomen,thepref)
+    print match
     
-    # match_block = gs_block(themen,thewomen,thepref,blocked)
-    # print match_block
+    match_block = gs_block(themen,thewomen,thepref,blocked)
+    print match_block
 
     match_tie = gs_tie(themen,thewomen,thepreftie)
     print match_tie
